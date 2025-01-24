@@ -9,4 +9,4 @@ jobs:
       - name: see event id
         run: echo $EVENT_ID
         env:
-          EVENT_ID: ${{ fromJSON(github.event) }}
+          EVENT_ID: ${{ github.event.issue.id }}

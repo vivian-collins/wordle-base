@@ -9,6 +9,7 @@ jobs:
       - name: checkout repo
         uses: actions/checkout@v4
       - name: get the target word
+        continue-on-error: true
         run: |
           LINE=$(echo "$EVENT_ID % $(cat words.txt | wc -l) + 1" | bc)
           TARGET=$(head -n $LINE words.txt | tail -n -1)

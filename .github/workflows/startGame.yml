@@ -16,3 +16,4 @@ jobs:
           echo $TARGET
         env:
           EVENT_ID: ${{ github.event.issue.id }}
+          TITLE: ${{ github.event.issue.title }}

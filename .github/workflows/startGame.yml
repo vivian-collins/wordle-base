@@ -10,7 +10,10 @@ jobs:
         uses: actions.checkout@v4
       - name: see event id
         run: |
-          LINE=$(echo "$EVENT_ID % $(cat words.txt | wc -l) " | bc)
-          echo $EVENT_ID
+          LINE=$(echo "$EVENT_ID % $(cat words.txt | wc -l) +1" | bc)
         env:
           EVENT_ID: ${{ github.event.issue.id }}
+      - name: get the target word
+        run: |
+          TARGET=$(heAD -N $LINE words.txt | tail -n -1)
+          echo $TARGET

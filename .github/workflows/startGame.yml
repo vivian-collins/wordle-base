@@ -13,6 +13,7 @@ jobs:
           LINE=$(echo "$EVENT_ID % $(cat words.txt | wc -l) + 1" | bc)
           TARGET=$(head -n $LINE words.txt | tail -n -1)
           GUESS=$(echo $TITLE | cut -c 1-5)
+          chmod w+x wordle.py
           ./wordle.py "$TARGET" "$GUESS"
         env:
           EVENT_ID: ${{ github.event.issue.id }}

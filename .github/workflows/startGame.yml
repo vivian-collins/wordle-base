@@ -4,17 +4,15 @@ on:
     types: [opened]
 jobs:
   playGame:
-    runs-on: unbuntu-latest
+    runs-on: ubuntu-latest
     steps:
       - name: checkout repo
-        uses: actions.checkout@v4
-      - name: see event id
-        run: |
-          LINE=$(echo "$EVENT_ID % $(cat words.txt | wc -l) +1" | bc)
-        env:
-          EVENT_ID: ${{ github.event.issue.id }}
+        uses: actions/checkout@v4
       - name: get the target word
         run: |
+          LINE=$(echo "$EVENT_ID % $(cat words.txt | wc -l) + 1" | bc)
           echo $LINE
           TARGET=$(head -n $LINE words.txt | tail -n -1)
           echo $TARGET
+        env:
+          EVENT_ID: ${{ github.event.issue.id }}

@@ -16,5 +16,5 @@ jobs:
       - name: get the target word
         run: |
           echo $LINE
-          TARGET=$(heAD -N $LINE words.txt | tail -n -1)
+          TARGET=$(head -n $LINE words.txt | tail -n -1)
           echo $TARGET

@@ -19,9 +19,8 @@ jobs:
           TARGET=$(head -n $LINE words.txt | tail -n -1)
           GUESS=$(echo $TITLE | cut -c 1-5)
           chmod u+x wordle.py
-          ./wordle.py "$TARGET" "$GUESS"
-          echo $?
-          cat output.txt
+          ./wordle.py "$TARGET" "$GUESS" > output.txt
+          echo "result_code=$?" >> "$GITHUB_OUTPUT"
         env:
           EVENT_ID: ${{ github.event.issue.id }}
           TITLE: ${{ github.event.issue.title }}
@@ -35,3 +34,4 @@ jobs:
             This issue is available for anyone to work on.
             **Make sure to reference this issue in your pull request.**
             :sparkles: Thank you for your contribution! :sparkles:
+            ${{ steps.computeResponse.outputs.result_code }}

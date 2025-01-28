@@ -2,6 +2,8 @@ name: Play the game
 on:
   issues:
     types: [opened]
+  issue_comment:
+    types: [created]
 jobs:
   playGame:
     runs-on: ubuntu-latest
@@ -23,7 +25,7 @@ jobs:
           echo "result_code=$?" >> "$GITHUB_OUTPUT"
         env:
           EVENT_ID: ${{ github.event.issue.id }}
-          TITLE: ${{ github.event.issue.title }}
+          TITLE: ${{ github.event.comment.body || github.event.issue.title }}
       - name: Add comment
         run: gh issue comment "$NUMBER" --body-file output.txt
         env:
